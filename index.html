@@ -344,7 +344,7 @@ function bd(label, data, colors) {
       { label:'Brecha',  value: brechaLast+'%', unit:'CCL/A3500',
         changes:{ '1s':+(brechaLast - ((num(b1w[2])&&num(b1w[1]))?+((num(b1w[2])/num(b1w[1])-1)*100).toFixed(1):brechaLast)).toFixed(1),
                   '1m':+(brechaLast - ((num(b1m[2])&&num(b1m[1]))?+((num(b1m[2])/num(b1m[1])-1)*100).toFixed(1):brechaLast)).toFixed(1),
-                  '3m':+(brechaLast - ((num(b3m[2])&&num(b3m[1]))?+((num(b3m[2])/num(b3m[1])-1)*100).toFixed(1):brechaLast)).toFixed(1) }, accent:'#6B7280' },
+                  '3m':+(brechaLast - ((num(b3m[2])&&num(b3m[1]))?+((num(b3m[2])/num(b3m[1])-1)*100).toFixed(1):brechaLast)).toFixed(1) }, accent:'#1A4CC8', accent:'#6B7280' },
       { label:'CER',     value: cerLast?.toLocaleString('es-AR',{maximumFractionDigits:1}) ?? '—', unit:'índice',
         changes:{ '1s':chg(cerLast,num(b1w[3])), '1m':chg(cerLast,num(b1m[3])), '3m':chg(cerLast,num(b3m[3])) }, accent:'#E32D91' },
       { label:'Badlar',  value: badlarLast ? badlarLast.toFixed(1)+'%' : '—', unit:'TNA',
