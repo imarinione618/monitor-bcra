@@ -460,9 +460,9 @@ function bd(label, data, colors) {
       data: {
         labels: tcL,
         datasets: [
-          { type:'line', label:'A3500', data:tcA, borderColor:'#1A4CC8', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
+          { type:'line', label:'A3500', data:tcA, borderColor:'#E32D91', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
           { type:'line', label:'CCL',   data:tcC, borderColor:'#1A4CC8', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
-          { type:'bar',  label:'Brecha %', data:tcB, backgroundColor:tcB.map(v=>v>=0?'rgba(26,76,200,0.5)':'rgba(107,114,128,0.5)'), borderWidth:0, yAxisID:'y2', barPercentage:1.5, categoryPercentage:1.0, order:10 },
+          { type:'bar',  label:'Brecha %', data:tcB, backgroundColor:tcB.map(v=>v>=0?'rgba(107,114,128,0.45)':'rgba(107,114,128,0.25)'), borderWidth:0, yAxisID:'y2', barPercentage:1.5, categoryPercentage:1.0, order:10 },
         ]
       },
       options: {
