@@ -532,16 +532,16 @@ function bd(label, data, colors) {
     };
     new Chart(document.getElementById('chartVarPrest'), { type:'bar',
       data:{ labels:MOM5, datasets:[
-        bd('Comerciales',   VP_COM, VP_COM.map(v=>v>=0?'rgba(26,76,200,.85)':'rgba(107,114,128,.85)')),
-        bd('Consumo',       VP_CON, VP_CON.map(v=>v>=0?'rgba(227,45,145,.8)':'rgba(107,114,128,.75)')),
-        bd('Garantía Real', VP_GAR, VP_GAR.map(v=>v>=0?'rgba(26,76,200,.8)':'rgba(107,114,128,.75)')),
+        bd('Comerciales',   VP_COM, VP_COM.map(v=>v>=0?'rgba(26,76,200,.85)':'rgba(26,76,200,.4)')),
+bd('Consumo',       VP_CON, VP_CON.map(v=>v>=0?'rgba(107,114,128,.7)':'rgba(107,114,128,.4)')),
+bd('Garantía Real', VP_GAR, VP_GAR.map(v=>v>=0?'rgba(227,45,145,.85)':'rgba(227,45,145,.4)')),
       ]}, options: momOpts
     });
     new Chart(document.getElementById('chartVarDepo'), { type:'bar',
       data:{ labels:MOM5, datasets:[
-        bd('Cta. Corriente', VD_CCT, VD_CCT.map(v=>v>=0?'rgba(26,76,200,.85)':'rgba(107,114,128,.85)')),
-        bd('Ahorro',         VD_AHO, VD_AHO.map(v=>v>=0?'rgba(26,76,200,.8)':'rgba(107,114,128,.85)')),
-        bd('Plazo Fijo',     VD_PLZ, VD_PLZ.map(v=>v>=0?'rgba(227,45,145,.8)':'rgba(107,114,128,.85)')),
+        bd('Cta. Corriente', VD_CCT, VD_CCT.map(v=>v>=0?'rgba(26,76,200,.85)':'rgba(26,76,200,.4)')),
+bd('Ahorro',         VD_AHO, VD_AHO.map(v=>v>=0?'rgba(107,114,128,.7)':'rgba(107,114,128,.4)')),
+bd('Plazo Fijo',     VD_PLZ, VD_PLZ.map(v=>v>=0?'rgba(227,45,145,.85)':'rgba(227,45,145,.4)')),
       ]}, options: momOpts
     });
 
