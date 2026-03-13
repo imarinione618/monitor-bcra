@@ -42,7 +42,7 @@
   .bench-tag { display: flex; flex-direction: column; align-items: center; background: var(--surface2); border-radius: 4px; padding: 3px 5px; gap: 1px; }
   .bench-tag-label { color: var(--muted); font-size: 9px; }
   .pos { color: var(--up); } .neg { color: var(--down); } .neu { color: var(--muted); }
-  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   @media(max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
   .kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 18px; position: relative; overflow: hidden; animation: fadeUp .5s ease both; }
   .kpi-card::after { content:''; position:absolute; bottom:-20px; right:-20px; width:80px; height:80px; border-radius:50%; background:var(--card-accent,var(--accent)); opacity:.04; }
@@ -90,7 +90,7 @@
   <div class="benchmarks-grid" id="bench-grid"></div>
 
   <div class="section-header">
-    <h2>Variables Clave</h2><div class="section-line"></div>
+    <h2>Variables Monetarias - promedios mensuales</h2><div class="section-line"></div>
     <span class="section-tag">promedio mensual <span id="bench-date">...</span>· mar-26</span>
   </div>
   <div class="kpi-grid" id="kpi-grid"></div>
@@ -420,12 +420,11 @@ function bd(label, data, colors) {
     const lastResum = resumData[resumData.length - 1];
     const lastMonth = lastResum[0];
     const KPIS = [
+      { label:'Depósitos ARS Priv.',  value:`$${(num(lastResum[15])).toLocaleString('es-AR')}`,  sub:'miles de millones', accent:'#6B7280' },
       { label:'Préstamos ARS Priv.',  value:`$${(num(lastResum[1])).toLocaleString('es-AR')}`,   sub:'miles de millones', accent:'#1A4CC8' },
-      { label:'Depósitos ARS Priv.',  value:`$${(num(lastResum[15])).toLocaleString('es-AR')}`,  sub:'miles de millones', accent:'#1A4CC8' },
       { label:'Depósitos USD Priv.',  value:`USD ${(num(lastResum[25])).toLocaleString('es-AR')}`,sub:'millones de USD',   accent:'#6B7280' },
-      { label:'Brecha cambiaria',     value:`${brechaLast}%`,                                    sub:'CCL vs A3500',      accent:'#E32D91' },
-      { label:'Tasa Badlar',          value:`${badlarLast?.toFixed(1)}%`,                        sub:'% TNA',             accent:'#E32D91' },
-    ];
+      { label:'Préstamos USD Priv.',  value:`USD ${(num(lastResum[11])).toLocaleString('es-AR')}`, sub:'millones de USD',  accent:'#1A4CC8' },
+        ];
 
     // ── UPDATE HEADER DATE ───────────────────────────────
     document.getElementById('update-date').textContent = `Datos al ${lastDate}`;
