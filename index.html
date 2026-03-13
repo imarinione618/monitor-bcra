@@ -9,14 +9,14 @@
 <style>
   :root {
     --bg: #0a0c10; --surface: #111318; --surface2: #181b22;
-    --border: #1e2330; --accent: #FF0066; --text: #e8eaf0; --muted: #6b7280;
-    --up: #FF0066; --down: #C0504D;
+    --border: #1e2330; --accent: #E32D91; --text: #e8eaf0; --muted: #6b7280;
+    --up: #E32D91; --down: #6B7280;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Mono', monospace; font-size: 13px; }
   body::before {
     content: ''; position: fixed; inset: 0;
-    background-image: linear-gradient(rgba(255,0,102,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(255,0,102,0.012) 1px, transparent 1px);
+    background-image: linear-gradient(rgba(227,45,145,0.012) 1px, transparent 1px), linear-gradient(90deg, rgba(227,45,145,0.012) 1px, transparent 1px);
     background-size: 40px 40px; pointer-events: none; z-index: 0;
   }
   .wrapper { position: relative; z-index: 1; max-width: 1400px; margin: 0 auto; padding: 0 24px 48px; }
@@ -178,8 +178,8 @@
 
 <!-- Loading overlay -->
 <div id="loading-overlay" style="position:fixed;inset:0;background:rgba(10,12,16,0.92);z-index:999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px">
-  <div style="width:40px;height:40px;border:3px solid #1e2330;border-top-color:#FF0066;border-radius:50%;animation:spin 0.8s linear infinite"></div>
-  <div style="font-family:'Syne',sans-serif;color:#FF0066;font-size:13px;letter-spacing:2px;text-transform:uppercase">Cargando datos</div>
+  <div style="width:40px;height:40px;border:3px solid #1e2330;border-top-color:#E32D91;border-radius:50%;animation:spin 0.8s linear infinite"></div>
+  <div style="font-family:'Syne',sans-serif;color:#E32D91;font-size:13px;letter-spacing:2px;text-transform:uppercase">Cargando datos</div>
   <div style="color:#6b7280;font-size:10px">Conectando con Google Sheets...</div>
 </div>
 <style>@keyframes spin{to{transform:rotate(360deg)}}</style>
@@ -252,11 +252,11 @@ function hideLoading() {
 function showError(msg) {
   const el = document.getElementById('loading-overlay');
   if (el) {
-    el.innerHTML = `<div style="text-align:center;color:#C0504D">
+    el.innerHTML = `<div style="text-align:center;color:#6B7280">
       <div style="font-size:24px;margin-bottom:12px">⚠</div>
       <div style="font-family:Syne,sans-serif;font-size:14px;margin-bottom:8px">Error al cargar datos</div>
       <div style="color:#6b7280;font-size:11px">${msg}</div>
-      <button onclick="location.reload()" style="margin-top:16px;padding:8px 20px;background:#FF0066;color:#ffffff;border:none;border-radius:6px;cursor:pointer;font-family:DM Mono,monospace">Reintentar</button>
+      <button onclick="location.reload()" style="margin-top:16px;padding:8px 20px;background:#E32D91;color:#ffffff;border:none;border-radius:6px;cursor:pointer;font-family:DM Mono,monospace">Reintentar</button>
     </div>`;
   }
 }
@@ -338,44 +338,35 @@ function bd(label, data, colors) {
 
     const BENCH = [
       { label:'A3500',   value: a3500Last?.toLocaleString('es-AR',{maximumFractionDigits:2}) ?? '—', unit:'$/USD',
-        changes:{ '1s':chg(a3500Last,num(b1w[1])), '1m':chg(a3500Last,num(b1m[1])), '3m':chg(a3500Last,num(b3m[1])) }, accent:'#1F497D' },
+        changes:{ '1s':chg(a3500Last,num(b1w[1])), '1m':chg(a3500Last,num(b1m[1])), '3m':chg(a3500Last,num(b3m[1])) }, accent:'#1A4CC8' },
       { label:'CCL',     value: cclLast?.toLocaleString('es-AR',{maximumFractionDigits:2}) ?? '—', unit:'$/USD',
-        changes:{ '1s':chg(cclLast,num(b1w[2])), '1m':chg(cclLast,num(b1m[2])), '3m':chg(cclLast,num(b3m[2])) }, accent:'#7030A0' },
+        changes:{ '1s':chg(cclLast,num(b1w[2])), '1m':chg(cclLast,num(b1m[2])), '3m':chg(cclLast,num(b3m[2])) }, accent:'#1A4CC8' },
       { label:'Brecha',  value: brechaLast+'%', unit:'CCL/A3500',
         changes:{ '1s':+(brechaLast - ((num(b1w[2])&&num(b1w[1]))?+((num(b1w[2])/num(b1w[1])-1)*100).toFixed(1):brechaLast)).toFixed(1),
                   '1m':+(brechaLast - ((num(b1m[2])&&num(b1m[1]))?+((num(b1m[2])/num(b1m[1])-1)*100).toFixed(1):brechaLast)).toFixed(1),
-                  '3m':+(brechaLast - ((num(b3m[2])&&num(b3m[1]))?+((num(b3m[2])/num(b3m[1])-1)*100).toFixed(1):brechaLast)).toFixed(1) }, accent:'#7F7F7F' },
+                  '3m':+(brechaLast - ((num(b3m[2])&&num(b3m[1]))?+((num(b3m[2])/num(b3m[1])-1)*100).toFixed(1):brechaLast)).toFixed(1) }, accent:'#6B7280' },
       { label:'CER',     value: cerLast?.toLocaleString('es-AR',{maximumFractionDigits:1}) ?? '—', unit:'índice',
-        changes:{ '1s':chg(cerLast,num(b1w[3])), '1m':chg(cerLast,num(b1m[3])), '3m':chg(cerLast,num(b3m[3])) }, accent:'#FF0066' },
+        changes:{ '1s':chg(cerLast,num(b1w[3])), '1m':chg(cerLast,num(b1m[3])), '3m':chg(cerLast,num(b3m[3])) }, accent:'#E32D91' },
       { label:'Badlar',  value: badlarLast ? badlarLast.toFixed(1)+'%' : '—', unit:'TNA',
-        changes:{ '1s':+(badlarLast-num(b1w[4])).toFixed(2), '1m':+(badlarLast-num(b1m[4])).toFixed(2), '3m':+(badlarLast-num(b3m[4])).toFixed(2) }, accent:'#FF0066' },
+        changes:{ '1s':+(badlarLast-num(b1w[4])).toFixed(2), '1m':+(badlarLast-num(b1m[4])).toFixed(2), '3m':+(badlarLast-num(b3m[4])).toFixed(2) }, accent:'#E32D91' },
       { label:'Tamar',   value: tamarLast ? tamarLast.toFixed(1)+'%' : '—', unit:'TNA',
-        changes:{ '1s':+(tamarLast-num(b1w[5])).toFixed(2), '1m':+(tamarLast-num(b1m[5])).toFixed(2), '3m':+(tamarLast-num(b3m[5])).toFixed(2) }, accent:'#C0504D' },
+        changes:{ '1s':+(tamarLast-num(b1w[5])).toFixed(2), '1m':+(tamarLast-num(b1m[5])).toFixed(2), '3m':+(tamarLast-num(b3m[5])).toFixed(2) }, accent:'#6B7280' },
       { label:'Caución', value: caucLast ? caucLast.toFixed(1)+'%' : '—', unit:'TNA',
-        changes:{ '1s':+(caucLast-num(b1w[6])).toFixed(2), '1m':+(caucLast-num(b1m[6])).toFixed(2), '3m':+(caucLast-num(b3m[6])).toFixed(2) }, accent:'#17375E' },
+        changes:{ '1s':+(caucLast-num(b1w[6])).toFixed(2), '1m':+(caucLast-num(b1m[6])).toFixed(2), '3m':+(caucLast-num(b3m[6])).toFixed(2) }, accent:'#212121' },
     ];
 
     // ── TASAS (daily) ────────────────────────────────────
     // Cols: Fecha(0), ...; need Remu, Tamar, Badlar, Personales, Adelantos
     // From session history: Tasas sheet cols — check header
-    const tasasHeader = tasasRows[0];
-    // Find col indices by name
-    function findCol(header, name) {
-      return header.findIndex(h => h?.toLowerCase().includes(name.toLowerCase()));
-    }
-    const tColRemu = findCol(tasasHeader, 'remuner') !== -1 ? findCol(tasasHeader, 'remuner') : 1;
-    const tColTam  = findCol(tasasHeader, 'tamar');
-    const tColBad  = findCol(tasasHeader, 'badlar');
-    const tColPer  = findCol(tasasHeader, 'personal');
-    const tColAde  = findCol(tasasHeader, 'adelant');
-
-    const tasasData = tasasRows.slice(1).filter(r => r[0] && r[0].match(/\d{4}-\d{2}/) && num(r[tColBad]) !== null);
-    const tF   = tasasData.map(r => r[0].substring(5));
-    const tR   = tasasData.map(r => num(r[tColRemu]));
-    const tTam = tasasData.map(r => num(r[tColTam]));
-    const tBad = tasasData.map(r => num(r[tColBad]));
-    const tPer = tasasData.map(r => num(r[tColPer]));
-    const tAde = tasasData.map(r => num(r[tColAde]));
+    // Tasas: 4 filas de header (0-3), datos desde fila 4
+    // Fecha en col 2 (YYYY-MM-DD), Remu=7, Tamar=8, Badlar=9, Personales=11, Adelantos=12
+    const tasasData = tasasRows.slice(4).filter(r => r[2] && r[2].match(/\d{4}-\d{2}-\d{2}/) && num(r[9]) !== null);
+    const tF   = tasasData.map(r => r[2].substring(5));
+    const tR   = tasasData.map(r => num(r[7]));
+    const tTam = tasasData.map(r => num(r[8]));
+    const tBad = tasasData.map(r => num(r[9]));
+    const tPer = tasasData.map(r => num(r[11]));
+    const tAde = tasasData.map(r => num(r[12]));
 
     // ── RESUMEN CORP (monthly) ───────────────────────────
     // Col 0: Fecha, Col 1: Préstamos ARS S Priv, Col 15: Depósitos ARS S Priv,
@@ -429,11 +420,11 @@ function bd(label, data, colors) {
     const lastResum = resumData[resumData.length - 1];
     const lastMonth = lastResum[0];
     const KPIS = [
-      { label:'Préstamos ARS Priv.',  value:`$${(num(lastResum[1])).toLocaleString('es-AR')}`,   sub:'miles de millones', accent:'#1F497D' },
-      { label:'Depósitos ARS Priv.',  value:`$${(num(lastResum[15])).toLocaleString('es-AR')}`,  sub:'miles de millones', accent:'#7030A0' },
-      { label:'Depósitos USD Priv.',  value:`USD ${(num(lastResum[25])).toLocaleString('es-AR')}`,sub:'millones de USD',   accent:'#7F7F7F' },
-      { label:'Brecha cambiaria',     value:`${brechaLast}%`,                                    sub:'CCL vs A3500',      accent:'#FF0066' },
-      { label:'Tasa Badlar',          value:`${badlarLast?.toFixed(1)}%`,                        sub:'% TNA',             accent:'#FF0066' },
+      { label:'Préstamos ARS Priv.',  value:`$${(num(lastResum[1])).toLocaleString('es-AR')}`,   sub:'miles de millones', accent:'#1A4CC8' },
+      { label:'Depósitos ARS Priv.',  value:`$${(num(lastResum[15])).toLocaleString('es-AR')}`,  sub:'miles de millones', accent:'#1A4CC8' },
+      { label:'Depósitos USD Priv.',  value:`USD ${(num(lastResum[25])).toLocaleString('es-AR')}`,sub:'millones de USD',   accent:'#6B7280' },
+      { label:'Brecha cambiaria',     value:`${brechaLast}%`,                                    sub:'CCL vs A3500',      accent:'#E32D91' },
+      { label:'Tasa Badlar',          value:`${badlarLast?.toFixed(1)}%`,                        sub:'% TNA',             accent:'#E32D91' },
     ];
 
     // ── UPDATE HEADER DATE ───────────────────────────────
@@ -469,9 +460,9 @@ function bd(label, data, colors) {
       data: {
         labels: tcL,
         datasets: [
-          { type:'line', label:'A3500', data:tcA, borderColor:'#1F497D', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
-          { type:'line', label:'CCL',   data:tcC, borderColor:'#7030A0', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
-          { type:'bar',  label:'Brecha %', data:tcB, backgroundColor:tcB.map(v=>v>=0?'rgba(112,48,160,0.5)':'rgba(192,80,77,0.5)'), borderWidth:0, yAxisID:'y2', barPercentage:1.5, categoryPercentage:1.0, order:10 },
+          { type:'line', label:'A3500', data:tcA, borderColor:'#1A4CC8', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
+          { type:'line', label:'CCL',   data:tcC, borderColor:'#1A4CC8', backgroundColor:'transparent', pointRadius:0, pointHoverRadius:4, borderWidth:1.8, tension:0.1, yAxisID:'y' },
+          { type:'bar',  label:'Brecha %', data:tcB, backgroundColor:tcB.map(v=>v>=0?'rgba(26,76,200,0.5)':'rgba(107,114,128,0.5)'), borderWidth:0, yAxisID:'y2', barPercentage:1.5, categoryPercentage:1.0, order:10 },
         ]
       },
       options: {
@@ -494,20 +485,20 @@ function bd(label, data, colors) {
       scales:{ x:{grid:G,ticks:{...T,maxTicksLimit:8}}, y:{grid:G,ticks:{...T,callback:v=>`${v}%`}} }
     };
     new Chart(document.getElementById('chartTasasPasivas'), { type:'line',
-      data:{ labels:tF, datasets:[ld('Remu',tR,'#FF0066'), ld('Tamar',tTam,'#1F497D'), ld('Badlar',tBad,'#7F7F7F')] },
+      data:{ labels:tF, datasets:[ld('Remu',tR,'#E32D91'), ld('Tamar',tTam,'#1A4CC8'), ld('Badlar',tBad,'#6B7280')] },
       options: tasaOpts
     });
     new Chart(document.getElementById('chartTasasActivas'), { type:'line',
-      data:{ labels:tF, datasets:[ld('Personales',tPer,'#C0504D'), ld('Adelantos',tAde,'#7030A0')] },
+      data:{ labels:tF, datasets:[ld('Personales',tPer,'#6B7280'), ld('Adelantos',tAde,'#1A4CC8')] },
       options: tasaOpts
     });
 
     // ── CHART: DEPÓSITOS REAL ────────────────────────────
     new Chart(document.getElementById('chartDepoReal'), { type:'line',
       data:{ labels:MONTHS, datasets:[{
-        ...ld('Depósitos ARS Real', DEPO_REAL, '#7030A0'),
-        backgroundColor:'rgba(112,48,160,0.07)', fill:'origin',
-        borderWidth:2, pointRadius:3, pointBackgroundColor:'#7030A0'
+        ...ld('Depósitos ARS Real', DEPO_REAL, '#1A4CC8'),
+        backgroundColor:'rgba(26,76,200,0.07)', fill:'origin',
+        borderWidth:2, pointRadius:3, pointBackgroundColor:'#1A4CC8'
       }]},
       options:{
         responsive:true, maintainAspectRatio:false,
@@ -520,9 +511,9 @@ function bd(label, data, colors) {
     // ── CHART: DEPÓSITOS USD ─────────────────────────────
     new Chart(document.getElementById('chartDepoUSD'), { type:'line',
       data:{ labels:MONTHS, datasets:[{
-        ...ld('Depósitos USD Priv.', DEPO_USD, '#17375E'),
-        backgroundColor:'rgba(23,55,94,0.12)', fill:'origin',
-        borderWidth:2, pointRadius:3, pointBackgroundColor:'#17375E'
+        ...ld('Depósitos USD Priv.', DEPO_USD, '#212121'),
+        backgroundColor:'rgba(33,33,33,0.12)', fill:'origin',
+        borderWidth:2, pointRadius:3, pointBackgroundColor:'#212121'
       }]},
       options:{
         responsive:true, maintainAspectRatio:false,
@@ -541,26 +532,26 @@ function bd(label, data, colors) {
     };
     new Chart(document.getElementById('chartVarPrest'), { type:'bar',
       data:{ labels:MOM5, datasets:[
-        bd('Comerciales',   VP_COM, VP_COM.map(v=>v>=0?'rgba(31,73,125,.85)':'rgba(192,80,77,.85)')),
-        bd('Consumo',       VP_CON, VP_CON.map(v=>v>=0?'rgba(255,0,102,.8)':'rgba(192,80,77,.75)')),
-        bd('Garantía Real', VP_GAR, VP_GAR.map(v=>v>=0?'rgba(112,48,160,.8)':'rgba(192,80,77,.75)')),
+        bd('Comerciales',   VP_COM, VP_COM.map(v=>v>=0?'rgba(26,76,200,.85)':'rgba(107,114,128,.85)')),
+        bd('Consumo',       VP_CON, VP_CON.map(v=>v>=0?'rgba(227,45,145,.8)':'rgba(107,114,128,.75)')),
+        bd('Garantía Real', VP_GAR, VP_GAR.map(v=>v>=0?'rgba(26,76,200,.8)':'rgba(107,114,128,.75)')),
       ]}, options: momOpts
     });
     new Chart(document.getElementById('chartVarDepo'), { type:'bar',
       data:{ labels:MOM5, datasets:[
-        bd('Cta. Corriente', VD_CCT, VD_CCT.map(v=>v>=0?'rgba(31,73,125,.85)':'rgba(192,80,77,.85)')),
-        bd('Ahorro',         VD_AHO, VD_AHO.map(v=>v>=0?'rgba(112,48,160,.8)':'rgba(192,80,77,.85)')),
-        bd('Plazo Fijo',     VD_PLZ, VD_PLZ.map(v=>v>=0?'rgba(255,0,102,.8)':'rgba(192,80,77,.85)')),
+        bd('Cta. Corriente', VD_CCT, VD_CCT.map(v=>v>=0?'rgba(26,76,200,.85)':'rgba(107,114,128,.85)')),
+        bd('Ahorro',         VD_AHO, VD_AHO.map(v=>v>=0?'rgba(26,76,200,.8)':'rgba(107,114,128,.85)')),
+        bd('Plazo Fijo',     VD_PLZ, VD_PLZ.map(v=>v>=0?'rgba(227,45,145,.8)':'rgba(107,114,128,.85)')),
       ]}, options: momOpts
     });
 
     // ── CHART: RATIO ─────────────────────────────────────
     new Chart(document.getElementById('chartRatio'), { type:'line',
       data:{ labels:MONTHS, datasets:[
-        { ...ld('Préstamos / Depósitos S. Privado', RATIO, '#FF0066'),
-          borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#FF0066', pointHoverRadius:5, tension:0.3 },
-        { ...ld('Préstamos / Depósitos Total', RATIO_TOT, '#17375E'),
-          borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#17375E', pointHoverRadius:5, tension:0.3, borderDash:[5,3] }
+        { ...ld('Préstamos / Depósitos S. Privado', RATIO, '#E32D91'),
+          borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#E32D91', pointHoverRadius:5, tension:0.3 },
+        { ...ld('Préstamos / Depósitos Total', RATIO_TOT, '#212121'),
+          borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#212121', pointHoverRadius:5, tension:0.3, borderDash:[5,3] }
       ]},
       options:{
         responsive:true, maintainAspectRatio:false,
@@ -583,3 +574,4 @@ function bd(label, data, colors) {
 </script>
 </body>
 </html>
+
